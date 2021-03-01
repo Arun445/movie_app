@@ -1,14 +1,71 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+        <!-- Bootstarp CSS -->
+        <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'movies/apps.css' %}" >
+
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <nav class="nav">
+                <div class="container">
+                    <div class="nav__menu">
+                        <a href="/" class="nav__header">Movies</a>
+                        <div class="col-md-5 pull-right">
+                            <form action="" class="form-inline" name="search">
+                                <div class="form-group">
+                                    <input type="text" name="query" class="form-control" value="{{ request.GET.query }}">
+                                    <input type="submit" class="btn btn-primary" value="Search">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <section class="result">
+                <div class="container">
+                    <div class="movies">
+                        {% for movies in search_result %}
+                            <div class="movies__item">
+                                <i class="movies__item-star fa fa-star hide"></i>
+                                <p class="movies__item-rating hide">{{ movies.fields.Rating }}/10</p>
+                                <img class="movies__item-image" src="{{ movies.fields.Pictures.0.url }}" alt="">
+                                <div class="movies__item-title">
+                                    <p>{{ movies.fields.Name }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+        </div>
 
 
-<form action="" name="search" >
-    <input type="text" name="query" />
-    <input type="submit" value="Search" />
 
 
-</form>
+        <!-- JAVASCRIPTS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.8.6/umd/popper.min.js"></script>
+
+        <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>-->
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+        <script src="{% static 'movies/app.js' %}" ></script>
+
+    </body>
 
 
-{% for movie in search_result %}
-<p>{{ movie.fields.Name }}</p>
-<img src="{{ movie.fields.Pictures.0.url }}" alt="">
-{% endfor %}
+</html>
+
+
