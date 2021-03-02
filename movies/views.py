@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from airtable import Airtable
 import os
@@ -19,3 +19,10 @@ def home_page(request):
         'search_result': search_result,
     }
     return render(request, 'movies/movies_base.html', context)
+
+def create(request):
+    print('hjoa')
+    return redirect('/')
+
+
+
