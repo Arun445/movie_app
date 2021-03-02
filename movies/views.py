@@ -21,8 +21,6 @@ def home_page(request):
     return render(request, 'movies/movies_base.html', context)
 
 
-
-
 def create(request):
     if request.method == 'POST':
         data = {
@@ -31,7 +29,11 @@ def create(request):
             'Rating': int(request.POST.get('rating')),
             'Notes': request.POST.get('notes')
         }
-        AT.insert(data)
+        response = AT.insert(data)
+
+        # notify on create
+        messages.success(request, 'New Movie Added: {}'.format(response['fields'].get('Name')))
+
     return redirect('/')
 
 def update(request, movie_id):
@@ -42,11 +44,18 @@ def update(request, movie_id):
             'Rating': int(request.POST.get('rating')),
             'Notes': request.POST.get('notes')
         }
-        AT.update(movie_id ,data)
+        response = AT.update(movie_id, data)
+
+    #notify on update
+        messages.success(request, 'Movie updated: {}'.format(response['fields'].get('Name')) )
+
     return redirect('/')
 
 def delete(request, movie_id):
 
-    AT.delete(movie_id)
+    movie_name = AT.get(movie_id)['fields'].get('Name')
+    response = AT.delete(movie_id)
 
+    # notify on delete
+    messages.warning(request, 'Movie {} successfully deleted'.format(movie_name))
     return redirect('/')
