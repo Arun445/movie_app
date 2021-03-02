@@ -21,7 +21,14 @@ def home_page(request):
     return render(request, 'movies/movies_base.html', context)
 
 def create(request):
-    print('hjoa')
+    if request.method == 'POST':
+        data = {
+            'Name': request.POST.get('name'),
+            'Pictures': [{'url': request.POST.get('url')}],
+            'Rating': int(request.POST.get('rating')),
+            'Notes': request.POST.get('notes')
+        }
+        AT.insert(data)
     return redirect('/')
 
 
