@@ -5,9 +5,9 @@ import os
 
 # Create your views here.
 
-AT = Airtable('appV8CGIdM2BlnEIK',
-             'Movies',
-             'keyoTyvNL7Iar7uFD')
+AT = Airtable('AIRTABLE_API_KEY',
+              'Movies',
+              api_key='AIRTABLE_MOVIESTABLE_BASE_ID')
 
 
 
