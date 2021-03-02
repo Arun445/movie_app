@@ -20,6 +20,9 @@ def home_page(request):
     }
     return render(request, 'movies/movies_base.html', context)
 
+
+
+
 def create(request):
     if request.method == 'POST':
         data = {
